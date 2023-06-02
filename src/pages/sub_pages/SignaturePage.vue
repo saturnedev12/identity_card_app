@@ -47,11 +47,12 @@ export default {
                 .then(response => {
                     // Gérer la réponse de la requête
                     console.log(response.data);
-                    this.$router.push(`/registor_page/identity_card`)
+                    // this.$router.push(`/registor_page/identity_card`)
                 })
                 .catch(error => {
                     // Gérer les erreurs de la requête
                     console.error(error);
+                    // this.$router.push(`/registor_page/identity_card`)
                 });
 
 
