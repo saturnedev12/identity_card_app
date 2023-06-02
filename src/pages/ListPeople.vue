@@ -4,7 +4,7 @@
             <v-btn variant="text" icon="mdi-menu"></v-btn>
             <v-toolbar-title>Liste de personnes</v-toolbar-title>
             <v-text-field v-model="serchValue" style="width: 100%;background-color: white; border-radius: 5px;" outlined
-                dense color="white" clearable label="label" :prepend-icon="icon" density="compact" variant="outlined"
+                dense color="white" clearable label="Rechercher" :prepend-icon="icon" density="compact" variant="outlined"
                 single-line hide-details type="text">
             </v-text-field>
             <v-spacer></v-spacer>
@@ -65,11 +65,9 @@ export default {
                 numCNI: "1234567890",
                 nom: "Doe",
                 prenom: "John",
-
                 taille: "180",
-
                 profession: "Software Engineer",
-
+                visage: '',
                 email: "john@example.com",
 
             },
