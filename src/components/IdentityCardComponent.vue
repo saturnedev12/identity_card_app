@@ -54,20 +54,20 @@ export default {
     props: {
         firstname: {
             type: String,
-            default: ''
+            default: localStorage.getItem('nom')
         },
         lastnname: {
             type: String,
-            default: ''
+            default: localStorage.getItem('prenom')
         },
         dateN: {
             type: String,
-            default: ''
+            default: localStorage.getItem('dateNaiss')
         },
         sexe: {
 
             type: String,
-            default: ''
+            default: localStorage.getItem('sexe')
         },
         numCNI: {
             type: String,

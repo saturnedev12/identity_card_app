@@ -29,7 +29,8 @@
                 </v-card-text>
             </v-card>
 
-            <v-btn @click=" this.$router.push(`/app`);" block class="mb-8" color="blue" size="large" variant="tonal">
+            <v-btn @click="this.$router.push(`/registor_page/list_people`);;" block class="mb-8" color="blue" size="large"
+                variant="tonal">
                 Log In
             </v-btn>
 
@@ -44,6 +45,9 @@
 
 <script>
 export default {
+    mounted() {
+        // this.$router.push(`/list_people`);
+    },
     data: () => ({
         visible: false,
     }),

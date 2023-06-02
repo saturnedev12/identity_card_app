@@ -2,7 +2,7 @@
     <v-card class="mx-auto" max-width="500" title="Informations complémentaires">
         <v-container>
 
-            <custom-textfield icon="mdi-briefcase-outline" label="Profession" />
+
             <v-select chips label="Situation matrimoniale "
                 :items="['célibataire', 'marié', 'divorcé', 'veuf/veuve', 'concubinage']" variant="outlined"
                 icon="mdi-briefcase-outline"></v-select>
@@ -35,10 +35,10 @@
     </v-card>
 </template>
 <script>
-import TextFiledComponent from "@/components/TextFiledComponent.vue";
+// import TextFiledComponent from "@/components/TextFiledComponent.vue";
 export default {
     components: {
-        'custom-textfield': TextFiledComponent,
+        // 'custom-textfield': TextFiledComponent,
     },
     name: 'ComplementaryInformation',
     data: () => ({
