@@ -1,14 +1,14 @@
 <template>
     <div id="card">
         <div id="card-title">
-            <h1>République HabboIslandaise</h1>
+            <h1>République de côte d'ivoire</h1>
         </div>
         <div id="card-id">
             <div id="card-number">
                 <p class="cardtitle">Carte nationale d'identité :</p>
-                <p>000000000000</p>
+                <p>{{ numCNI }}</p>
             </div>
-            <p class="cardtitle">Nationalité HabboIslandaise</p>
+            <p class="cardtitle">Nationalité: Ivoirienne</p>
         </div>
         <div id="card-information">
             <div id="card-photo"></div>
@@ -16,23 +16,23 @@
                 <div id="card-name">
                     <div class="card-box"></div>
                     <p class="cardtitle">Nom :</p>
-                    <p>Ruben</p>
+                    <p>{{ firstname }}</p>
                     <div class="card-box"></div>
                     <p class="cardtitle">Prénom :</p>
-                    <p>Sacha</p>
+                    <p>{{ lastnname }}</p>
                 </div>
                 <div id="card-detail">
                     <div class="card-box">
                         <p class="cardtitle">Sexe :</p>
-                        <p>M</p>
+                        <p>{{ sexe }}</p>
                     </div>
                     <div class="card-box">
                         <p class="cardtitle">Né(e) le :</p>
-                        <p>10.02.1998</p>
+                        <p>{{ dateN }}</p>
                     </div>
                     <div class="card-box">
                         <p class="cardtitle">Ville :</p>
-                        <p>HabboVille</p>
+                        <p>Abidjan</p>
                     </div>
                 </div>
                 <div id="card-sign">
@@ -52,14 +52,27 @@
 export default {
     name: 'IdentityCardComponent',
     props: {
-        label: {
-            type: String,
-            default: 'text'
-        },
-        icon: {
+        firstname: {
             type: String,
             default: ''
-        }
+        },
+        lastnname: {
+            type: String,
+            default: ''
+        },
+        dateN: {
+            type: String,
+            default: ''
+        },
+        sexe: {
+
+            type: String,
+            default: ''
+        },
+        numCNI: {
+            type: String,
+            default: ''
+        },
     },
     data: () => ({
         tab: null,
@@ -103,7 +116,7 @@ p {
     border: solid 2px #000;
     border-radius: 10px;
     box-shadow: 1px 2px 10px #000;
-    background-color: #E9EEF2;
+    background-color: #f9dbaa;
     margin: auto;
 }
 
@@ -113,7 +126,7 @@ p {
     letter-spacing: 2px;
     text-align: center;
     text-transform: uppercase;
-    background-color: #2C6C73;
+    background-color: #e68a44;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
 }
@@ -134,12 +147,12 @@ p {
 }
 
 #card-photo {
-    background: url(https://www.habbo.fr/habbo-imaging/avatarimage?hb=image&user=null&headonly=0&direction=3&head_direction=3&action=&gesture=&size=l) no-repeat, #BFAE99;
+    background: url(https://cdn.vuetifyjs.com/images/lists/1.jpg) no-repeat, #BFAE99;
     background-position: center;
     background-repeat: none;
     border: solid 2px #000;
-    height: 150px;
-    width: 150px;
+    height: 140px;
+    width: 140px;
 }
 
 #card-detail {

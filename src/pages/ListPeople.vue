@@ -26,6 +26,7 @@
                         <v-list-item-subtitle>{{ item.profession }}</v-list-item-subtitle>
                         <v-list-item-subtitle>{{ item.email }}</v-list-item-subtitle>
                         <v-list-item-subtitle>{{ item.taille }}cm</v-list-item-subtitle>
+                        <v-list-item-subtitle>date naissance {{ item.dateNaiss }}cm</v-list-item-subtitle>
                     </v-list-item-content>
                 </div>
 
@@ -36,8 +37,8 @@
 
         <template v-slot:default="{}">
             <v-card>
-                <identity-card />
-
+                <identity-card :firstname="current_item.nom" :lastnname="current_item.prenom"
+                    :dateN="current_item.dateNaiss" :sexe="current_item.sexe" :numCNI="current_item.numCNI" />
                 <!-- <v-card-actions class="justify-end">
                     <v-btn variant="text" @click="isActive.value = false">Close</v-btn>
                 </v-card-actions> -->
@@ -59,6 +60,7 @@ export default {
     data: () => ({
         dialogOpen: false,
         serchValue: '',
+        current_item: {},
         items: [
             {
                 id: 1,
@@ -68,6 +70,8 @@ export default {
                 taille: "180",
                 profession: "Software Engineer",
                 visage: '',
+                dateNaiss: '',
+                sexe: '',
                 email: "john@example.com",
 
             },
@@ -79,9 +83,11 @@ export default {
     },
     methods: {
         handleItemClick(item) {
+            this.current_item = item;
             this.dialogOpen = true;
             // Fonction de rappel lors du clic sur un élément
-            console.log('Élément cliqué :', item);
+
+            console.log('Élément cliqué :', item.nom);
             // Autres actions à effectuer lors du clic sur un élément
         },
         fetchData(value) {
