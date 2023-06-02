@@ -9,20 +9,23 @@
             </v-text-field>
             <v-spacer></v-spacer>
 
-            <v-btn variant="text" icon="mdi-magnify"></v-btn>
+            <v-btn variant="text" icon="mdi-magnify" @click="fetchData"></v-btn>
         </v-toolbar>
 
         <v-list>
             <v-list-item v-for="(item, index) in items" :key="index" @click="handleItemClick(item)">
-                <div style="display: flex; flex-direction: row; justify-content: flex-end;">
+                <div style="display: flex; flex-direction: row; justify-content: flex-start; width: 100%;">
                     <v-list-item-avatar>
-                        <img :src="item.prependAvatar"
+                        <img :src="'https://cdn.vuetifyjs.com/images/lists/1.jpg'"
                             style="size: 5px; width: 30; height: 30; border-radius: 10px; margin-right: 10px;" />
                     </v-list-item-avatar>
                     <v-list-item-content>
+                        <v-list-item-subtitle>{{ item.numCNI }}</v-list-item-subtitle>
+                        <v-list-item-title>{{ item.nom }} {{ item.prenom }}</v-list-item-title>
 
-                        <v-list-item-title>{{ item.title }}</v-list-item-title>
-                        <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{ item.profession }}</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{ item.email }}</v-list-item-subtitle>
+                        <v-list-item-subtitle>{{ item.taille }}cm</v-list-item-subtitle>
                     </v-list-item-content>
                 </div>
 
@@ -45,6 +48,8 @@
 
 <script>
 import IdentityCardComponent from "@/components/IdentityCardComponent.vue";
+import axios from 'axios';
+
 export default {
 
     name: 'ListPeople',
@@ -54,81 +59,43 @@ export default {
     data: () => ({
         dialogOpen: false,
         items: [
+            {
+                id: 1,
+                numCNI: "1234567890",
+                nom: "Doe",
+                prenom: "John",
 
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
-                title: 'Brunch this weekend?',
-                subtitle: `<span class="text-primary">Ali Connors</span> &mdash; I'll be in your neighborhood doing errands this weekend. Do you want to hang out?`,
+                taille: "180",
+
+                profession: "Software Engineer",
+
+                email: "john@example.com",
+
             },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-                title: 'Summer BBQ',
-                subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
-            },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                title: 'Oui oui',
-                subtitle: '<span class="text-primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
-            },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-                title: 'Birthday gift',
-                subtitle: '<span class="text-primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-            },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-                title: 'Recipe to try',
-                subtitle: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-            },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                title: 'Oui oui',
-                subtitle: '<span class="text-primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
-            },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-                title: 'Birthday gift',
-                subtitle: '<span class="text-primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-            },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-                title: 'Recipe to try',
-                subtitle: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-            },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
-                title: 'Oui oui',
-                subtitle: '<span class="text-primary">Sandra Adams</span> &mdash; Do you have Paris recommendations? Have you ever been?',
-            },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
-                title: 'Birthday gift',
-                subtitle: '<span class="text-primary">Trevor Hansen</span> &mdash; Have any ideas about what we should get Heidi for her birthday?',
-            },
-            { type: 'divider', inset: true },
-            {
-                prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
-                title: 'Recipe to try',
-                subtitle: '<span class="text-primary">Britta Holt</span> &mdash; We should eat this: Grate, Squash, Corn, and tomatillo Tacos.',
-            },
+
         ],
     }),
-
+    mounted() {
+        this.fetchData()
+    },
     methods: {
         handleItemClick(item) {
             this.dialogOpen = true;
             // Fonction de rappel lors du clic sur un élément
             console.log('Élément cliqué :', item);
             // Autres actions à effectuer lors du clic sur un élément
+        },
+        fetchData() {
+            axios.get('http://localhost:8000/api/users')
+                .then(response => {
+                    console.log(response.data.users)
+                    this.items = response.data.users
+                    // Traitement des données de la réponse
+                })
+                .catch(error => {
+                    console.log(error)
+                    // Gestion des erreurs
+                });
         },
     },
 }
